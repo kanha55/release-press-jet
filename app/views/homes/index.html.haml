@@ -1,0 +1,39 @@
+%div.mt-5.card.p-5
+  %div#mainn-section.text-center.p-4
+    = text_field_tag "accountName", "", class: 'first-input url-input mb-3', data: {class_name: 'first-image'}, placeholder: "Link to https://forbes.com/"
+    %br
+    = text_field_tag "accountName", "", class: 'first-input url-input  mb-3', data: {class_name: 'second-image'}, placeholder: "Link to https://cbc.com/"
+    %br
+    = text_field_tag "accountName", "", class: 'first-input url-input  mb-3', data: {class_name: 'third-image'}, placeholder: "Link to https://fox.com/"
+    %br
+    = text_field_tag "accountName", "", class: 'first-input url-input  mb-3', data: {class_name: 'fourth-image'}, placeholder: "Link to https://nbc.com/"
+    %br
+    = text_field_tag "accountName", "", class: 'first-input url-input  mb-3', data: {class_name: 'fifth-image'}, placeholder: "Link to https://cw.com/"
+    %br
+    = button_tag "Get logo", class: "btn btn-success", onclick: 'display_image()'
+
+
+  %div#out-put-section{style: "margin-left: 313px;"}
+    = image_tag("https://image.shutterstock.com/image-vector/no-image-vector-symbol-missing-260nw-1310632172.jpg", class: 'first-image', size: '100x100', style: '')
+    =image_tag("https://image.shutterstock.com/image-vector/no-image-vector-symbol-missing-260nw-1310632172.jpg", class: 'second-image', size: '100x100', style: '')
+    =image_tag("https://image.shutterstock.com/image-vector/no-image-vector-symbol-missing-260nw-1310632172.jpg", class: 'third-image', size: '100x100', style: '')
+    =image_tag("https://image.shutterstock.com/image-vector/no-image-vector-symbol-missing-260nw-1310632172.jpg", class: 'fourth-image', size: '100x100', style: '')
+    =image_tag("https://image.shutterstock.com/image-vector/no-image-vector-symbol-missing-260nw-1310632172.jpg", class: 'fifth-image', size: '100x100', style: '')
+  %div.card-title
+    %h3 Embed Code
+    Copy and paste the code below to the HTML of your website, you may need to contact yout webmaster to install.
+    = text_area_tag "accountName", "<script type='text/javascript'>window.Sentry && window.Sentry.init({ dsn: 'https://d533a1de7d8e4eee85342c8cdeaee7b2@o13610.ingest.sentry.io/1768312' });</script> \n<img  src='https://logo.clearbit.com/forbes.com' width='100' height='100'>\n<img  src='https://logo.clearbit.com/forbes.com' width='100' height='100'>\n<img  src='https://logo.clearbit.com/forbes.com' width='100' height='100'>\n<img  src='https://logo.clearbit.com/forbes.com' width='100' height='100'>", class: 'first-input url-input mb-3', data: {class_name: 'first-image'}, style: 'width: 100%;height: 120px;color: #5c5b5f;'
+      
+:javascript
+    function display_image() {
+      var inputs = $('#mainn-section').children('.url-input');
+      for (let index = 0; index < inputs.length; index++) {
+        var written_url = $(inputs[index]).val();
+        if (written_url.length != 0){
+          var hostname = $('<a>').prop('href', written_url).prop('hostname');
+          var final_url = "https://logo.clearbit.com/" + hostname;
+          var class_name = $(inputs[index]).data('class-name');
+          $('.' + class_name).attr("src", final_url);
+        }
+      }
+    }
